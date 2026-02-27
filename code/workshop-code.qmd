@@ -139,14 +139,18 @@ slice_sample(drought_exp_clean, n = 10)
 
 ## What is the relationship between SLA and plant mass?  
 
-
-
 Make a scatterplot to visualize SLA (the predictor) on the x-axis, and total mass (the response) on the y-axis.  
+
 
 Label the axes with units where appropriate.  
 
 Add a title describing the relationship (e.g. as SLA increases, total mass ______). 
 
+```{r}
+ggplot(data = drought_exp_clean, aes(x = sla, y = total_g)) + 
+  geom_point() + 
+labs(x = "Specific Leaf Area cm\U00B2/(g)", y = "Total mass (g)")
+```
 
 
 
@@ -155,11 +159,17 @@ Add a title describing the relationship (e.g. as SLA increases, total mass _____
 
 Make a jitterplot to visualize the differences in plant mass between water treatments.  
 
+
 Label the axes with units where appropriate.  
 
 Add a title describing the differences in (mean or median) plant mass between water treatments.
 
 
+```{r}
+ggplot(data = drought_exp_clean, aes(x = water_treatment, y = total_g, color = water_treatment)) +
+  geom_jitter(hight = 0, width = 0.3) +
+  labs(x = "Water Treatment", y = "Total mass (g)", title = "Well watered plants tend to have a higher mas") 
+```
 
 
 
@@ -175,10 +185,13 @@ Add a title describing the differences in (mean or median) plant mass between sp
 
 Bonus: order the x-axis by decreasing mean plant mass _and_ wrap the long species names using the `label_wrap()` function from the `scales` package.
 
-
-
-
-
+```{r}
+ggplot(data = drought_exp_clean, aes(x = reorder(species_name, -total_g), y = total_g, color = species_name )) +
+  geom_jitter(hight = 0, width = 0.3) +
+  labs(x = "Water Treatment", y = "Total mass (g)", title = "Well watered plants tend to have a higher mas") +
+  scale_x_discrete(labels = label_wrap(10)) + 
+  theme(legend.position = "none")
+```
 
 
 
