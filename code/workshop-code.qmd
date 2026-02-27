@@ -129,8 +129,6 @@ str(drought_exp_clean)
 Insert code to display 10 random rows from the data frame here.  
 
 ```{r}
-#| label: 
-
 slice_sample(drought_exp_clean, n = 10)
 ```
 
